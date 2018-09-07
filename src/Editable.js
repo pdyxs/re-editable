@@ -13,14 +13,9 @@ class Editable extends Component {
     };
 
     this.focusRef = React.createRef();
-
-    this.onChange = this.onChange.bind(this);
-    this.onStartEdit = this.onStartEdit.bind(this);
-    this.onCancel = this.onCancel.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit() {
+  onSubmit = () => {
     event.preventDefault();
     this.props.onChange(this.state.value);
     this.setState({
@@ -28,7 +23,7 @@ class Editable extends Component {
     });
   }
 
-  onCancel() {
+  onCancel = () => {
     event.preventDefault();
     this.setState({
       isEditing: false,
@@ -36,7 +31,7 @@ class Editable extends Component {
     });
   }
 
-  onStartEdit() {
+  onStartEdit = () => {
     event.preventDefault();
     this.setState({
       isEditing: true,
@@ -54,7 +49,7 @@ class Editable extends Component {
     }
   }
 
-  onChange(val) {
+  onChange = (val) => {
     if (!this.props.objectVal && val !== null && typeof val === 'object') {
       var cval = this.state.value;
       Object.entries(val).forEach(
@@ -64,7 +59,7 @@ class Editable extends Component {
     } else {
       this.setState({ value: val });
     }
-  }
+  } 
 
   render() {
     const {
