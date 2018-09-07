@@ -1,13 +1,17 @@
 {
-  "name": "react-library-starter",
-  "version": "0.0.1",
-  "description": "A react library starter project",
+  "name": "react-editable",
+  "version": "0.1.0",
+  "description": "React Components for editable inputs",
   "main": "dist/index.js",
   "license": "APACHE",
   "scripts": {
     "lint": "eslint src",
     "build": "webpack",
     "prepublish": "rimraf dist && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdyxs/react-editable.git"
   },
   "dependencies": {
     "babel-core": "^6.0.20",
@@ -24,7 +28,12 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "rimraf": "^2.5.4",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "react-color": "^2.14.1",
+    "react-markdown": "^3.6.0",
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-solid": "^5.0.10",
+    "@fortawesome/react-fontawesome": "0.0.18"
   },
   "devDependencies": {
     "eslint": "^3.15.0",
