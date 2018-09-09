@@ -31,8 +31,8 @@ class Editable extends Component {
     });
   }
 
-  onStartEdit = () => {
-    event.preventDefault();
+  onStartEdit = (e) => {
+    e.preventDefault();
     this.setState({
       isEditing: true,
       hasFocus: true,
@@ -59,7 +59,7 @@ class Editable extends Component {
     } else {
       this.setState({ value: val });
     }
-  } 
+  }
 
   render() {
     const {
