@@ -15,16 +15,16 @@ class Editable extends Component {
     this.focusRef = React.createRef();
   }
 
-  onSubmit = () => {
-    event.preventDefault();
+  onSubmit = (e) => {
+    e.preventDefault();
     this.props.onChange(this.state.value);
     this.setState({
       isEditing: false
     });
   }
 
-  onCancel = () => {
-    event.preventDefault();
+  onCancel = (e) => {
+    e.preventDefault();
     this.setState({
       isEditing: false,
       value: this.props.value
