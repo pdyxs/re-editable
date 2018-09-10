@@ -1,12 +1,28 @@
 import Editable from './Editable';
-import EditableText from './EditableText';
-import EditableNumber from './EditableNumber';
-import EditableColour from './EditableColour';
-import EditableBoolean from './EditableBoolean';
+import EditableText, {
+  TextRenderer, TextEditor, TextEditableRenderer
+} from './EditableText';
+
+import EditableNumber, {
+  NumberRenderer, NumberEditor, NumberEditableRenderer
+} from './EditableNumber';
+
+import EditableColour, {
+  ColourRenderer, ColourEditor, ColourEditableRenderer
+} from './EditableColour';
+
+import EditableBoolean, {
+  BooleanRenderer, BooleanEditor, BooleanEditableRenderer
+} from './EditableBoolean';
 
 export {
   Editable as default,
   EditableText,
   EditableNumber,
-  EditableColour
+  EditableColour,
+  EditableBoolean,
+  TextRenderer, TextEditor, TextEditableRenderer,
+  NumberRenderer, NumberEditor, NumberEditableRenderer,
+  ColourRenderer, ColourEditor, ColourEditableRenderer,
+  BooleanRenderer, BooleanEditor, BooleanEditableRenderer
 };

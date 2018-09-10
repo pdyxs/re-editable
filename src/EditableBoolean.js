@@ -3,9 +3,11 @@ import Editable from './Editable';
 
 const BooleanRenderer = (props) => {
   var val = props.value;
-  if (!props.canEdit) {
-    return (<span>{val}</span>)
-  }
+  return (<span>{val}</span>);
+}
+
+const BooleanEditableRenderer = (props) => {
+  var val = props.value;
   return (
     <a className="editable"
       href="#" onClick={props.onStartEdit}>
@@ -33,13 +35,17 @@ const BooleanEditor = (props) => {
 class EditableBoolean extends Component {
 
   render() {
-    let val = this.props.value || false;
+    var {value, ...otherProps} = this.props;
+    let val = value || false;
     return (
-      <Editable inline Renderer={BooleanRenderer} Editor={BooleanEditor}
-        value={val} onChange={this.props.onChange} />
+      <Editable inline
+        Renderer={BooleanRenderer}
+        EditableRenderer={BooleanEditableRenderer}
+        Editor={BooleanEditor}
+        value={val} {...otherProps} />
     )
   }
 }
 
-export { BooleanRenderer, BooleanEditor }
+export { BooleanRenderer, BooleanEditor, BooleanEditableRenderer }
 export default EditableBoolean;

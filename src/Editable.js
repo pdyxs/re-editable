@@ -65,6 +65,7 @@ class Editable extends Component {
   render() {
     const {
       Renderer,
+      EditableRenderer,
       Editor,
       placeholder,
       className,
@@ -75,6 +76,7 @@ class Editable extends Component {
       ...otherProps
     } = this.props;
     var isEditable = _.isUndefined(canEdit) || canEdit;
+    var MyEditableRenderer = EditableRenderer || Renderer;
 
     if (this.state.isEditing) {
       let EditButtons = Buttons || EditableButtons;
@@ -86,15 +88,22 @@ class Editable extends Component {
         </span>
       )
     }
-    return (
-      <span className={className + ' editable-renderer'}>
-        <Renderer placeholder={placeholder} value={this.props.value}
-          onStartEdit={this.onStartEdit} {...otherProps} canEdit={isEditable} />
-        { isEditable &&
+    if (isEditable) {
+      return (
+        <span className={className + ' editable-renderer'}>
+          <MyEditableRenderer placeholder={placeholder} value={this.props.value}
+            onStartEdit={this.onStartEdit} {...otherProps} canEdit={isEditable} />
           <button className="px-1 btn btn-link" onClick={this.onStartEdit}>
             <FontAwesomeIcon icon={faPencil} />
           </button>
-        }
+        </span>
+      );
+    }
+
+    return (
+      <span className={className + ' editable-renderer'}>
+        <Renderer placeholder={placeholder} value={this.props.value}
+          {...otherProps} canEdit={isEditable} />
       </span>
     );
   }

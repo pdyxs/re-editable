@@ -7,10 +7,13 @@ import ReactMarkdown from 'react-markdown';
 import Editable from './Editable';
 
 const TextRenderer = (props) => {
-  if (!props.canEdit) {
-    return (<span>{props.value}</span>);
+  if (props.value.includes('\n')) {
+    return (<ReactMarkdown source={props.value} />);
   }
+  return (<span>{props.value}</span>);
+};
 
+const TextEditableRenderer = (props) => {
   return (<a className="editable"
     role="button" onClick={props.onStartEdit}>
     {props.value && props.value.length > 0 ?
@@ -19,7 +22,7 @@ const TextRenderer = (props) => {
         props.value) :
       <span className="text-muted">({props.placeholder})</span>}
   </a>);
-};
+}
 
 const TextEditor = (props) => {
   let onChange = (evt) => props.onChange(evt.target.value);
@@ -49,16 +52,22 @@ class EditableText extends Component {
   render() {
     if (this.props.long || this.props.value.length > 50) {
       return (
-        <Editable Renderer={TextRenderer} Editor={TextAreaEditor}
+        <Editable
+          Renderer={TextRenderer}
+          EditableRenderer={TextEditableRenderer}
+          Editor={TextAreaEditor}
           {...this.props} />
       )
     }
     return (
-      <Editable inline Renderer={TextRenderer} Editor={TextEditor}
+      <Editable inline
+        Renderer={TextRenderer}
+        EditableRenderer={TextEditableRenderer}
+        Editor={TextEditor}
         {...this.props} />
     )
   }
 }
 
-export { TextRenderer, TextEditor }
+export { TextRenderer, TextEditor, TextEditableRenderer }
 export default EditableText;

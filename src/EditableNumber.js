@@ -3,11 +3,11 @@ import Editable from './Editable';
 
 const NumberRenderer = (props) => {
   var val = props.value || 0;
+  return (<span>{val}</span>);
+}
 
-  if (!props.canEdit) {
-    return (<span>{val}</span>)
-  }
-
+const NumberEditableRenderer = (props) => {
+  var val = props.value || 0;
   if (props.zeroText && val == 0) {
     return (
       <a className="editable"
@@ -45,11 +45,14 @@ class EditableNumber extends Component {
     let val = value || 0;
 
     return (
-      <Editable inline Renderer={NumberRenderer} Editor={NumberEditor}
+      <Editable inline
+        Renderer={NumberRenderer}
+        EditableRenderer={NumberEditableRenderer}
+        Editor={NumberEditor}
         value={val} {...otherProps} />
     )
   }
 }
 
-export { NumberRenderer, NumberEditor }
+export { NumberRenderer, NumberEditor, NumberEditableRenderer }
 export default EditableNumber;
