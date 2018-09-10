@@ -3,6 +3,11 @@ import Editable from './Editable';
 
 const NumberRenderer = (props) => {
   var val = props.value || 0;
+
+  if (!props.canEdit) {
+    return (<span>{val}</span>)
+  }
+
   if (props.zeroText && val == 0) {
     return (
       <a className="editable"
@@ -36,12 +41,12 @@ const NumberEditor = (props) => {
 class EditableNumber extends Component {
 
   render() {
-    let val = this.props.value || 0;
+    var {value, ...otherProps} = this.props;
+    let val = value || 0;
 
     return (
       <Editable inline Renderer={NumberRenderer} Editor={NumberEditor}
-        value={val} min={this.props.min} max={this.props.max}
-        onChange={this.props.onChange} />
+        value={val} {...otherProps} />
     )
   }
 }

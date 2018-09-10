@@ -11,6 +11,14 @@ let defaultColor = {
 
 const ColourRenderer = (props) => {
   let val = props.value || defaultColor;
+  if (!props.canEdit) {
+    return (
+      <span className="colour-display border rounded"
+        style={
+          {backgroundColor: `rgba(${val.r},${val.g},${val.b},${val.a})`}
+        }></span>
+    )
+  }
   return (
     <a className="editable"
       role="button" onClick={props.onStartEdit}>

@@ -3,6 +3,9 @@ import Editable from './Editable';
 
 const BooleanRenderer = (props) => {
   var val = props.value;
+  if (!props.canEdit) {
+    return (<span>{val}</span>)
+  }
   return (
     <a className="editable"
       href="#" onClick={props.onStartEdit}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPencil from '@fortawesome/fontawesome-free-solid/faPencilAlt';
 import EditableButtons from './EditableButtons';
+import _ from 'lodash';
 
 class Editable extends Component {
   constructor() {
@@ -70,8 +71,10 @@ class Editable extends Component {
       value,
       onChange,
       Buttons,
+      canEdit,
       ...otherProps
     } = this.props;
+    var isEditable = _.isUndefined(canEdit) || canEdit;
 
     if (this.state.isEditing) {
       let EditButtons = Buttons || EditableButtons;
@@ -85,10 +88,13 @@ class Editable extends Component {
     }
     return (
       <span className={className + ' editable-renderer'}>
-        <Renderer placeholder={placeholder} value={this.props.value} onStartEdit={this.onStartEdit} {...otherProps} />
-        <button className="px-1 btn btn-link" onClick={this.onStartEdit}>
-          <FontAwesomeIcon icon={faPencil} />
-        </button>
+        <Renderer placeholder={placeholder} value={this.props.value}
+          onStartEdit={this.onStartEdit} {...otherProps} canEdit={isEditable} />
+        { isEditable &&
+          <button className="px-1 btn btn-link" onClick={this.onStartEdit}>
+            <FontAwesomeIcon icon={faPencil} />
+          </button>
+        }
       </span>
     );
   }

@@ -6,16 +6,20 @@ import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
 import ReactMarkdown from 'react-markdown';
 import Editable from './Editable';
 
-const TextRenderer = (props) => (
-  <a className="editable"
+const TextRenderer = (props) => {
+  if (!props.canEdit) {
+    return (<span>{props.value}</span>);
+  }
+
+  return (<a className="editable"
     role="button" onClick={props.onStartEdit}>
     {props.value && props.value.length > 0 ?
       (props.value.includes('\n') ?
         <ReactMarkdown source={props.value} /> :
         props.value) :
       <span className="text-muted">({props.placeholder})</span>}
-  </a>
-);
+  </a>);
+};
 
 const TextEditor = (props) => {
   let onChange = (evt) => props.onChange(evt.target.value);
@@ -46,14 +50,12 @@ class EditableText extends Component {
     if (this.props.long || this.props.value.length > 50) {
       return (
         <Editable Renderer={TextRenderer} Editor={TextAreaEditor}
-          value={this.props.value} placeholder={this.props.placeholder}
-          onChange={this.props.onChange} />
+          {...this.props} />
       )
     }
     return (
       <Editable inline Renderer={TextRenderer} Editor={TextEditor}
-        value={this.props.value} placeholder={this.props.placeholder}
-        onChange={this.props.onChange} />
+        {...this.props} />
     )
   }
 }
