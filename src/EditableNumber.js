@@ -42,7 +42,13 @@ class EditableNumber extends Component {
 
   render() {
     var {value, ...otherProps} = this.props;
-    let val = value || 0;
+    let val = value;
+    if (val == null) {
+      val = this.props.default;
+    }
+    if (val == null) {
+      val = 0;
+    }
 
     return (
       <Editable inline
